@@ -1,0 +1,15 @@
+---
+global:
+  image:
+    tag: "v2.6.7"
+
+server:
+  extraArgs:
+    - --insecure
+  ingress: 
+    enabled: true
+    ingressClassName: nginx
+    hosts: 
+      - agrocd.10-0-10-10.sslip.io
+  
+

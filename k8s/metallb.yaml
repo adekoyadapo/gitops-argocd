@@ -1,0 +1,14 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: kindip
+  namespace: metallb
+spec:
+  addresses:
+  - 127.0.0.10-127.0.0.100
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: kindip
+  namespace: metallb
