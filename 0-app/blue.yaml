@@ -38,7 +38,7 @@ spec:
   selector:
     matchLabels:
       app: blue
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -79,3 +79,23 @@ spec:
       protocol: TCP
   selector:
     app: blue
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-blue
+  namespace: blue
+spec:
+  rules:
+  - host: blue.10-0-10-10.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: blue-service
+            port:
+              number: 80
+  ingressClassName: nginx

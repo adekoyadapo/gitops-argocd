@@ -38,7 +38,7 @@ spec:
   selector:
     matchLabels:
       app: green
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -79,8 +79,25 @@ spec:
   selector:
     app: green
 
-
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-green
+  namespace: green
+spec:
+  rules:
+  - host: green.10-0-10-10.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: green-service
+            port:
+              number: 80
+  ingressClassName: nginx
 
 
 
