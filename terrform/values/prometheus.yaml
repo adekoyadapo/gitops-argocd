@@ -1,0 +1,22 @@
+prometheus:
+  ingress: 
+    enabled: true
+    ingressClassName: nginx
+    hosts: 
+      - prometheus.10-0-10-10.sslip.io
+
+grafana:
+  enabled: true
+  adminPassword: prom-operator
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - grafana.10-0-10-10.sslip.io
+  additionalDataSources: 
+    - name: loki
+      access: proxy
+      basicAuth: false
+      type: loki
+      url: http://loki:3100
